@@ -24,6 +24,8 @@ repositories {
 }
 
 dependencies {
+    implementation ("org.springframework.boot:spring-boot-starter")
+    implementation ("io.github.cdimascio:java-dotenv:5.2.2")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-authorization-server")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
