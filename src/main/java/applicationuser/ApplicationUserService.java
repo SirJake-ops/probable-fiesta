@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApplicationUserService {
 
-    private final ApplicationUserRepository applicationUserRepository;
-
-
+    private final ApplicationUserRepository _applicationUserRepository;
 
     @Autowired
     ApplicationUserService(ApplicationUserRepository applicationUserRepository) {
-        this.applicationUserRepository = applicationUserRepository;
+        this._applicationUserRepository = applicationUserRepository;
     }
+
+
 }

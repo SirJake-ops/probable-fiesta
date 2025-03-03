@@ -18,7 +18,7 @@ import java.util.Map;
 public class OAuthUserController {
 
 
-    @GetMapping("/user")
+    @GetMapping
     public Map<String, String> user(@AuthenticationPrincipal OAuth2User principal) {
         log.info("We are inside the user method");
        return Collections.singletonMap("name", principal.getAttribute("name"));
