@@ -34,6 +34,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.session:spring-session-core")
     implementation("org.flywaydb:flyway-core:11.1.1")
+    implementation("org.postgresql:postgresql:42.7.5")
     runtimeOnly("org.flywaydb:flyway-database-postgresql:11.1.1")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")

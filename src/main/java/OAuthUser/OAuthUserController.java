@@ -1,6 +1,5 @@
 package OAuthUser;
 
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -20,7 +19,7 @@ public class OAuthUserController {
 
     @GetMapping
     public Map<String, String> user(@AuthenticationPrincipal OAuth2User principal) {
-        log.info("We are inside the user method");
        return Collections.singletonMap("name", principal.getAttribute("name"));
     }
+
 }
