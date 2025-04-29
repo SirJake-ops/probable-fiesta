@@ -26,4 +26,4 @@ spring:
     name: Task Management Application
 
 server:
-  port: 8080
+  port: 8081
