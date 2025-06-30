@@ -1,7 +1,7 @@
 services:
   db:
-    image: postgres:latest
-    container_name: task_management_db
+    image: postgres:16
+    container_name: practical_matsumoto
     environment:
       POSTGRES_DB: task_management
       POSTGRES_USER: postgres
