@@ -1,6 +1,6 @@
-package applicationuser;
+package applicationuser.domain.models;
 
-import enums.Roles;
+import shared.common.enums.Roles;
 import jakarta.persistence.*;
 
 @Entity

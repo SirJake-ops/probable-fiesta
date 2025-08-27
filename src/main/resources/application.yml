@@ -8,8 +8,8 @@ spring:
             client-secret: ${GOOGLE_CLIENT_SECRET}
   datasource:
     url: jdbc:postgresql://localhost:5432/task_management
-    username: postgres
-    password: postgres
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
   flyway:
     enabled: true
@@ -17,8 +17,9 @@ spring:
     baseline-on-migrate: true
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
         format_sql: true

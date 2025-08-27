@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -18,8 +18,13 @@ public class OAuthUserController {
 
 
     @GetMapping
-    public Map<String, String> user(@AuthenticationPrincipal OAuth2User principal) {
-       return Collections.singletonMap("name", principal.getAttribute("name"));
+    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("name", principal.getAttribute("name"));
+        userInfo.put("email", principal.getAttribute("email"));
+        userInfo.put("picture", principal.getAttribute("picture"));
+        userInfo.put("sub", principal.getAttribute("sub"));
+        return userInfo;
     }
 
 }

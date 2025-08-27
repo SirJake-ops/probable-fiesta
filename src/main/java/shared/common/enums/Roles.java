@@ -1,4 +1,4 @@
-package enums;
+package shared.common.enums;
 
 public enum Roles {
     ADMIN("ADMIN"),

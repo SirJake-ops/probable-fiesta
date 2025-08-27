@@ -1,5 +1,6 @@
-package applicationuser;
+package applicationuser.application;
 
+import applicationuser.infrastructure.persistence.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

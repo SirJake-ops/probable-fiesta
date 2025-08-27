@@ -1,4 +1,4 @@
-package configs;
+package shared.common.configs;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
