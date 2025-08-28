@@ -1,4 +1,4 @@
-package applicationuser.domain.dtos;
+package AuctionUser.domain.dtos;
 
 import lombok.Builder;
 import lombok.Data;

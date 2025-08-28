@@ -1,8 +1,13 @@
 package shared.common.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Roles {
     ADMIN("ADMIN"),
-    USER("USER");
+    SUPERINTENDENT("SUPERINTENDENT"),
+    SHIP_OFFICER("SHIP_OFFICER"),
+    VENDOR("VENDOR");
 
 
     private final String value;
@@ -11,7 +16,4 @@ public enum Roles {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
 }

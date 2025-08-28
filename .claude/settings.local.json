@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(C:\\Users\\jake2\\RiderProjects\\BackendTracker/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
