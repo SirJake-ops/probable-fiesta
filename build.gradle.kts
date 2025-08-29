@@ -8,6 +8,8 @@ group = "org.example"
 version = "0.0.1-SNAPSHOT"
 
 java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
     toolchain {
         languageVersion = JavaLanguageVersion.of(23)
     }
@@ -36,6 +38,8 @@ dependencies {
     implementation("org.flywaydb:flyway-core:11.1.1")
     implementation("org.postgresql:postgresql:42.7.5")
     implementation("org.springframework.boot:spring-boot-starter-validation:4.0.0-M2")
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
     runtimeOnly("org.flywaydb:flyway-database-postgresql:11.1.1")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -50,4 +54,5 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    jvmArgs("-javaagent:${configurations.testRuntimeClasspath.get().find { it.name.contains("mockito-inline") }}")
 }

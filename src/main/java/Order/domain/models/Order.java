@@ -5,8 +5,7 @@ import Order.enums.OrderType;
 import Order.enums.Side;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import shared.common.entities.BaseEntity;
 
 import java.math.BigDecimal;
@@ -15,10 +14,13 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "trading_order", indexes = {
     @Index(name = "idx_symbol_side", columnList = "symbol, side"),
     @Index(name = "idx_created_date", columnList = "created_date")
 })
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order extends BaseEntity {
     @NotNull(message = "Price is required")
     @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
