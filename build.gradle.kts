@@ -54,5 +54,4 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    jvmArgs("-javaagent:${configurations.testRuntimeClasspath.get().find { it.name.contains("mockito-inline") }}")
 }
