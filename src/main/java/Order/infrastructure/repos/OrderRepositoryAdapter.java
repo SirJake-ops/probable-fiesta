@@ -3,7 +3,7 @@ package Order.infrastructure.repos;
 import Order.domain.IOrderRepository;
 import Order.domain.models.Order;
 import Order.infrastructure.exceptions.PersistenceException;
-import Order.infrastructure.persistance.OrderRepository;
+import Order.infrastructure.persistence.OrderRepository;
 
 import java.util.Optional;
 import java.util.UUID;

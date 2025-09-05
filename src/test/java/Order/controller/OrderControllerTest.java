@@ -7,7 +7,7 @@ import Order.domain.models.Order;
 import Order.enums.OrderStatus;
 import Order.enums.OrderType;
 import Order.enums.Side;
-import Order.infrastructure.persistance.OrderRepository;
+import Order.infrastructure.persistence.OrderRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

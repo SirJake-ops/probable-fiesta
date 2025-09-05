@@ -14,4 +14,6 @@ public class ApplicationUserController {
     ApplicationUserController(ApplicationUserService applicationUserService) {
         this.applicationUserService = applicationUserService;
     }
+
+
 }

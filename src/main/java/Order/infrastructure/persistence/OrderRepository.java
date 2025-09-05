@@ -1,9 +1,13 @@
-package Order.infrastructure.persistance;
+package Order.infrastructure.persistence;
 
 import Order.domain.models.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public interface OrderRepository extends JpaRepository<Order, UUID> {
+    Optional<Order> findOrderById(UUID id);
 }
