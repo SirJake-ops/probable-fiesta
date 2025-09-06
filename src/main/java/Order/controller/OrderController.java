@@ -47,6 +47,11 @@ public class OrderController {
 
     @PutMapping("/{id}/cancel")
     public ResponseEntity<OrderDto> cancelOrder(@PathVariable UUID id) {
-        return ResponseEntity.ok(OrderDto.builder().build());
+        try {
+            OrderDto canceledOrder = orderService.cancelOrder(id);
+            return ResponseEntity.ok(canceledOrder);
+        } catch (OrderException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

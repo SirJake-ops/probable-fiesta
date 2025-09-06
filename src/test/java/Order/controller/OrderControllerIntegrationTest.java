@@ -138,4 +138,41 @@ public class OrderControllerIntegrationTest {
                         .content(objectMapper.writeValueAsString(updatedOrderDto)))
                 .andExpect(status().isInternalServerError());
     }
+
+    @Test
+    @DisplayName("Should return an Ok response when canceling an existing order")
+    public void shouldReturnOk_WhenCancelingExistingOrder() throws Exception {
+        OrderDto orderDto = OrderDto.builder()
+                .price(new BigDecimal("50000.50"))
+                .quantity(new BigDecimal("0.001"))
+                .symbol("BTC/USD")
+                .side(Side.BUY)
+                .orderType(OrderType.LIMIT)
+                .filledQuantity(BigDecimal.ZERO)
+                .status(OrderStatus.PENDING)
+                .build();
+
+        String response = mockMvc.perform(post("/api/v1/orders")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(orderDto)))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        OrderDto createdOrder = objectMapper.readValue(response, OrderDto.class);
+
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/api/v1/orders/" + createdOrder.getId() + "/cancel")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.status").value("CANCELLED"));
+    }
+
+    @Test
+    @DisplayName("Should return a BadRequest response when canceling a non-existing order")
+    public void shouldReturnBadRequest_WhenCancelingNonExistingOrder() throws Exception {
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/api/v1/orders/" + "00000000-0000-0000-0000-000000000000" + "/cancel")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
 }

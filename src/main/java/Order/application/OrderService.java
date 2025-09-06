@@ -48,4 +48,14 @@ public class OrderService {
             throw new OrderException("Order not found");
         }
     }
+
+    public OrderDto cancelOrder(UUID id) {
+        Optional<Order> order = orderRepository.findOrderById(id);
+        if (order.isPresent()) {
+            order.get().setStatus(OrderStatus.CANCELLED);
+            return orderMapper.toDto(orderRepository.save(order.get()));
+        } else {
+            throw new OrderException("Order not found");
+        }
+    }
 }
