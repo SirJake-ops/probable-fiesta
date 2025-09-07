@@ -7,8 +7,10 @@ import Order.domain.models.Order;
 import Order.enums.OrderStatus;
 import Order.enums.OrderType;
 import Order.enums.Side;
+import Order.events.OrderPlacedEvent;
 import Order.infrastructure.persistence.OrderRepository;
 import jakarta.validation.Valid;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -20,15 +22,18 @@ public class OrderService {
 
     private final OrderMapper orderMapper;
     private final OrderRepository orderRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
-    public OrderService(OrderMapper orderMapper, OrderRepository orderRepository) {
+    public OrderService(OrderMapper orderMapper, OrderRepository orderRepository, ApplicationEventPublisher applicationEventPublisher) {
         this.orderMapper = orderMapper;
         this.orderRepository = orderRepository;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     public OrderDto createOrder(@Valid OrderDto orderDto) {
         Order order = orderMapper.toEntity(orderDto);
         orderRepository.save(order);
+        applicationEventPublisher.publishEvent(new OrderPlacedEvent(order));
         return orderMapper.toDto(order);
     }
 
