@@ -1,4 +1,4 @@
-package Order.application;
+package Order.application.services;
 
 import Order.application.exceptions.OrderException;
 import Order.domain.dtos.OrderDto;
@@ -7,8 +7,10 @@ import Order.domain.models.Order;
 import Order.enums.OrderStatus;
 import Order.enums.OrderType;
 import Order.enums.Side;
-import Order.events.OrderPlacedEvent;
+import Order.events.event.OrderCancelledEvent;
+import Order.events.event.OrderPlacedEvent;
 import Order.infrastructure.persistence.OrderRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -30,10 +32,11 @@ public class OrderService {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
+    @Transactional
     public OrderDto createOrder(@Valid OrderDto orderDto) {
         Order order = orderMapper.toEntity(orderDto);
         orderRepository.save(order);
-        applicationEventPublisher.publishEvent(new OrderPlacedEvent(order));
+        applicationEventPublisher.publishEvent(new OrderPlacedEvent(this, order));
         return orderMapper.toDto(order);
     }
 
@@ -53,11 +56,14 @@ public class OrderService {
         }
     }
 
+    @Transactional
     public OrderDto cancelOrder(UUID id) {
         Optional<Order> order = orderRepository.findOrderById(id);
         if (order.isPresent()) {
             order.get().setStatus(OrderStatus.CANCELLED);
-            return orderMapper.toDto(orderRepository.save(order.get()));
+            Order orderCancelled = orderRepository.save(order.get());
+            applicationEventPublisher.publishEvent(new OrderCancelledEvent(this, orderCancelled));
+            return  orderMapper.toDto(orderCancelled);
         } else {
             throw new OrderException("Order not found");
         }

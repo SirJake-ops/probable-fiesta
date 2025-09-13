@@ -39,6 +39,7 @@ dependencies {
     implementation("org.postgresql:postgresql:42.7.5")
     implementation("org.springframework.boot:spring-boot-starter-validation:4.0.0-M2")
     implementation("org.mapstruct:mapstruct:1.5.5.Final")
+    implementation("org.springframework:spring-messaging:6.2.10")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
     runtimeOnly("org.flywaydb:flyway-database-postgresql:11.1.1")
     compileOnly("org.projectlombok:lombok")
