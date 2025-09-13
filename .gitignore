@@ -38,3 +38,4 @@ out/
 
 .env
 .claude/**
+order_workflow_diagram.mermaid

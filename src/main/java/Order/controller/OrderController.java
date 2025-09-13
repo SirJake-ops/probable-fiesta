@@ -1,6 +1,6 @@
 package Order.controller;
 
-import Order.application.OrderService;
+import Order.application.services.OrderService;
 import Order.application.exceptions.OrderException;
 import Order.domain.dtos.LimitOrderDto;
 import Order.domain.dtos.OrderDto;

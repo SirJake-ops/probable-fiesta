@@ -1,6 +1,6 @@
 package Order.controller;
 
-import Order.application.OrderService;
+import Order.application.services.OrderService;
 import Order.domain.dtos.OrderDto;
 import Order.domain.mapper.OrderMapper;
 import Order.domain.models.Order;
